@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/add" method="post">
+                        Add a new Endpoint below:
+                        <br>
+                        <br>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="endpoint" placeholder="Endpoint" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="ip" placeholder="Ip" required>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="port" placeholder="Port" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Endpoint</th>
+                        <th>Ip</th>
+                        <th>Port</th>
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for endpoint in endpoints %}
+                    <tr>
+                        <td>{{ endpoint.id }}</td>
+                        <td><strong>{{ endpoint.endpoint }}</strong></td>
+                        <td>{{ endpoint.ip }}</td>
+                        <td>{{ endpoint.port }}</td>
+                        <td>
+                            <a class="btn btn-danger" href="/delete/{{ endpoint.id }}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
